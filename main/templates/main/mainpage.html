@@ -1,0 +1,31 @@
+
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block content %}
+
+
+    <div class="page-container">
+        <img src="{% static 'images/lion.png' %}" alt="아기사자" width="100px"
+        <p class="tag">LikeLion_14th_hw</p>
+        <h1 class="title">2026 멋쟁이사자처럼 {{ generation }}기 이승우</h1>
+        <h6 class="welcome">2주차 세션 과제입니당!</h6>
+
+        <div class="section">
+            <div class="section-title">🦁 2주차 들어가기전 tmi 🦁</div>
+            <ul>
+                <li>2주차 세션 진행은 누가? : {{ info.who }}</li>
+                <li>2주차 멘토님은 누구? : {{ info.mentor }}</li>
+                <li>{{ info.note }}</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🦁 2주차 세션은 뭐했지? 🦁</div>
+            <ul>
+                {% for shortcut in shortcuts %}
+                <li>{{ shortcut }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="page-container">
+        <p class="tag">LikeLion_14th_hw</p>
+        <h1 class="title">2026 멋쟁이사자처럼 14기 이승우</h1>
+        <h6 class="welcome">자기소개 페이지입니다</h6>
+
+        <div class="section">
+            <div class="section-title">🦁 tmi 🦁</div>
+            <ul>
+                <li>당신의 이름은? : {{ info.name }}</li>
+                <li>2주차 멘토님은 누구? : {{ info.mentor }}</li>
+                <li>{{ info.note_2 }}</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🦁 who am i? 🦁</div>
+            <ul>
+                {% for shortcut_2 in shortcuts_2 %}
+                <li>{{ shortcut_2 }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endblock %}
