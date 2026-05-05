@@ -51,13 +51,12 @@ def edit(request, post_id):
     return render(request, 'main/edit.html',{"post":edit_post})
 
 def create(request):
-    if not request.user.is_authentucated:
+    if not request.user.is_authenticated:
         return redirect('accounts:login')
     new_post = Post()
 
     new_post.title = request.POST['title']
     new_post.writer = request.user.username
-    new_post.writer = request.POST['writer']
     new_post.pub_date = request.POST['pub_date']
     new_post.content =request.POST['content']
 
@@ -76,7 +75,6 @@ def update(request, post_id):
     
     update_post.title = request.POST['title']
     update_post.writer = request.user.username
-    update_post.writer = request.POST['writer']
     update_post.pub_date = request.POST['pub_date']
     update_post.content = request.POST['content']
     update_post.save()
