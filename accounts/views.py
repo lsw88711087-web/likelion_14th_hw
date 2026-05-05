@@ -29,7 +29,7 @@ def signup(request):
         username = request.POST['username']
 
         if User.objects.filter(username=username).exists():
-            return render(request, 'accounts/signup.html')#중복아이디 처리
+            return render(request, 'accounts/signup.html')#중복아이디 처리 과제
     
         if request.POST['password'] == request.POST['confirm']:
             newuser = User.objects.create_user(
