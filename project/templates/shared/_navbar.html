@@ -8,7 +8,7 @@
 
 <header class="header">
     <div class="header-left">
-        <img src="{% static 'images/icon-logo.png' %}" alt="로고" class="logo">
+        <img src="{% static 'images/lion.png' %}" alt="로고" class="logo">
     </div>
     <div class="header-right">
         {% if user.is_authenticated %}
@@ -32,7 +32,7 @@
     <div class="nav-item {% if request.resolver_match.url_name == 'mainpage' %}active{% endif %}">
         <a class="nav-item" href="{% url 'main:mainpage' %}">
             <div class="nav-icon">
-                <img src="{% static 'images/icon-food.png' %}" class="nav-icon-img">
+                <img src="{% static 'images/lion.png' %}" class="nav-icon-img">
             </div>
             <span class="nav-label">홈</span>
         </a>
@@ -41,7 +41,7 @@
     <div class="nav-item {% if request.resolver_match.url_name == 'postpage' %}active{% endif %}">
         <a class="nav-item" href="{% url 'main:postpage' %}">
             <div class="nav-icon">
-                <img src="{% static 'images/icon-book.png' %}" alt="게시판 아이콘" class="nav-icon-img">
+                <img src="{% static 'images/lion.png' %}" alt="게시판 아이콘" class="nav-icon-img">
             </div>
             <span class="nav-label">게시판</span>
         </a>
