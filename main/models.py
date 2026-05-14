@@ -14,6 +14,10 @@ class Post(models.Model):
     view_count = models.IntegerField(default=0)
 
     tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
+    
+    like = models.ManyToManyField(User, related_name='likes', blank=True)
+    like_count = models.PositiveIntegerField(default=0)
+    
 
 
     def summary(self):
@@ -30,12 +34,7 @@ class Comment(models.Model):
         return f"{self.post.title}: {self.content[:20]} by {self.writer.profile.nickname}"
 
 
-class Blog(models.Model):
-    title = models.CharField(max_length=50)
-    writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
-    content = models.TextField()
-    pub_date = models.DateTimeField()
-    tags = models.ManyToManyField(Tag, related_name='blogs', blank=True)
+
 
     def summary(self):
         return self.content[:20]

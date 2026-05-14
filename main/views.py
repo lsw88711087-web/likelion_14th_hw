@@ -24,8 +24,8 @@ def mainpage(request):
     }
     return render(request, 'main/mainpage.html', context)
 
-def save_tags(blog):
-    words = blog.content.split()
+def save_tags(post):
+    words = post.content.split()
     tag_list = []
 
     for w in words:
@@ -33,11 +33,11 @@ def save_tags(blog):
             if w[0] == '#':
                 tag_list.append(w[1:])
 
-    blog.tags.clear()
+    post.tags.clear()
 
     for t in tag_list:
         tag, boolean = Tag.objects.get_or_create(name=t)
-        blog.tags.add(tag)
+        post.tags.add(tag)
 
 
 def new_post(request):
@@ -132,8 +132,8 @@ def tag_list(request):
 
 def tag_blog_list(request, tag_id):
     tag = get_object_or_404(Tag, pk=tag_id)
-    blogs = tag.blogs.all()
-    return render(request, 'main/tag_blog_list.html',{'tag':tag, 'blogs':blogs})
+    posts = tag.posts.all()
+    return render(request, 'main/tag_blog_list.html',{'tag':tag, 'posts':posts})
 
 def comment_edit(request, comment_id):
     if not request.user.is_authenticated:
@@ -189,6 +189,20 @@ def comment_delete(request, comment_id):
 
     return redirect('main:detail', target_post_id)
 
+def likes(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.user in post.like.all():
+        post.like.remove(request.user)
+        post.like_count -=1
+        post.save()
+    else:
+        post.like.add(request.user)
+        post.like_count += 1
+        post.save()
+
+    return redirect('main:detail', post.id)
+
 
     
 
@@ -212,4 +226,5 @@ def secondpage(request):
             '--자기소개 끝--'
         ]
     }
+    
     return render(request, 'main/secondpage.html',second_context)
