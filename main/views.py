@@ -130,10 +130,10 @@ def tag_list(request):
     tags = Tag.objects.all()
     return render(request, 'main/tag_list.html', {'tags':tags})
 
-def tag_blog_list(request, tag_id):
+def tag_post_list(request, tag_id):
     tag = get_object_or_404(Tag, pk=tag_id)
     posts = tag.posts.all()
-    return render(request, 'main/tag_blog_list.html',{'tag':tag, 'posts':posts})
+    return render(request, 'main/tag_post_list.html',{'tag':tag, 'posts':posts})
 
 def comment_edit(request, comment_id):
     if not request.user.is_authenticated:
