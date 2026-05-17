@@ -203,6 +203,21 @@ def likes(request, post_id):
 
     return redirect('main:detail', post.id)
 
+def comment_likes(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if request.user in comment.like.all():
+        comment.like.remove(request.user)
+        comment.like_count -=1
+        comment.save()
+    else:
+        comment.like.add(request.user)
+        comment.like_count += 1
+        comment.save()
+
+    return redirect('main:detail',comment.post.id)
+
+
 
     
 

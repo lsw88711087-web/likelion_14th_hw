@@ -32,26 +32,20 @@ def signup(request):
             return render(request, 'accounts/signup.html')#중복아이디 처리 과제
     
         if request.POST['password'] == request.POST['confirm']:
-            newuser = User.objects.create_user(
+            new_user = User.objects.create_user(
                 username=request.POST['username'],
                 password=request.POST['password'],
             )
 
-            nickname = request.POST['nickname']
-            major = request.POST['major']
-            recommender_code = request.POST['recommender_code']#추가한 과제
-            profile_image = request.FILES.get('profile_image')
-
-            profile = Profile(
-                user=newuser,
-                nickname=nickname,
-                major=major,
-                profile_image=profile_image,
-                recommender_code= recommender_code,#추가한과제
-            )
+            profile = new_user.profile
+            profile.nickname = request.POST['nickname']
+            profile.major = request.POST['major']
+            profile.recommender_code = request.POST['recommender_code']
+            profile.profile_image = request.FILES.get('profile_image')
             profile.save()
+        
 
-            auth.login(request, newuser)
+            auth.login(request, new_user)
             return redirect('main:postpage')
         
     return render(request, 'accounts/signup.html')

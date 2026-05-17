@@ -62,11 +62,24 @@
                     </div>
                     <p class="comment-content">{{ comment.content }}</p>
                </div>
+
+
                <div class="comments-actions">
                {% if user.is_authenticated and comment.writer == user %}
                  <a href="{% url 'main:comment_edit' comment.id %}" class="btn-outline">수정</a>
                  <a href="{% url 'main:comment_delete' comment.id %}" class="btn-danger">삭제</a>
                {% endif %}
+               </div>
+
+               <div class="detail-likes">
+               <a href="{% url 'main:comment_likes' comment.id %}">
+                    {% if user in comment.like.all %}
+                    취소
+                    {% else %}
+                    좋아요
+                    {% endif %}
+               </a>
+               <span>{{ comment.like_count }}개</span>
                </div>
                
                {% empty %}
